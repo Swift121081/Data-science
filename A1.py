@@ -1,13 +1,22 @@
 import matplotlib.pyplot as plt
-x=[0,5,10,15,20,25,30]
-y1=[10,15,20,20,30,15,0]
-y2=[10,12,15,12,20,10,0]
-plt.plot(x,y1,linestyle='dashed', marker='D')
-plt.plot(x,y2,linestyle='dashed', marker='D')
-plt.title('velocity-Time Graph')
-plt.xlabel('Velocity m/s')
-plt.ylabel('Time(s)')
-plt.xlim(5,25)
-plt.ylim(5,25)
+
+blood_sugar_men = [113, 85, 90, 150, 149, 88, 93, 115, 135, 80, 77, 82, 129]
+blood_sugar_women = [67, 98, 120, 133, 150, 84, 69, 89, 79, 120, 112, 100]
+
+type = [blood_sugar_men, blood_sugar_women]
+colors = ['g','r']
+label = ['men','women']
+bins = [80, 100, 125, 150]
+plt.xlabel("Blood Sugar Range")
+plt.ylabel("Total no. of patients")
+# Diabetic blood_sugar range
+#
+# 80 - 100 = normal
+# 100 - 125 = pre-diabetic
+# above 125 = diabetic
+
+plt.hist(type, bins=bins, width=0.95, color=colors, label=label, orientation="horizontal")
+
+plt.title("Blood Sugar Level Chart")
 plt.legend()
 plt.show()
