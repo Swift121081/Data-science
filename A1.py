@@ -1,22 +1,41 @@
+# import libraries
+import pandas as pd
+import numpy as np
 import matplotlib.pyplot as plt
+import seaborn as sns
 
-blood_sugar_men = [113, 85, 90, 150, 149, 88, 93, 115, 135, 80, 77, 82, 129]
-blood_sugar_women = [67, 98, 120, 133, 150, 84, 69, 89, 79, 120, 112, 100]
+#IMport dataset
+#data=sns.load_dataset("Titanic Dataset")
+data = pd.read_csv('Titanic Dataset.csv')
+# import dataset
+ 
+print(data.head())
 
-type = [blood_sugar_men, blood_sugar_women]
-colors = ['g','r']
-label = ['men','women']
-bins = [80, 100, 125, 150]
-plt.xlabel("Blood Sugar Range")
-plt.ylabel("Total no. of patients")
-# Diabetic blood_sugar range
-#
-# 80 - 100 = normal
-# 100 - 125 = pre-diabetic
-# above 125 = diabetic
+print(data.dtypes)
 
-plt.hist(type, bins=bins, width=0.95, color=colors, label=label, orientation="horizontal")
+# Nominal categorical variables
+nominal_cat = ['Nmae','Ticket','Cabin']
 
-plt.title("Blood Sugar Level Chart")
-plt.legend()
-plt.show()
+# Ordinal categorical variables
+ordinal_cat = ['Embarked','Gender']
+
+# Median value of feature dender and embarked
+
+print(data['Gender'].value_counts())
+
+gender_categories = ['Female','Male']
+
+data['Gender'] = pd.Categorical(data['Gender'], gender_categories, ordered=True)
+
+median_index = np.median(data['Gender'].cat.codes)
+median_gender = gender_categories[int(median_index)]
+
+print(data['Embarked'].value_counts())
+
+embarked_categories = ['S','C','Q']
+
+data['Embarked'] = pd.Categorical(data['Embarked'], embarked_categories, ordered=True)
+
+median_index = np.median(data['Embarked'].cat.codes)
+median_embarked = embarked_categories[int(median_index)]
+print(median_embarked)
